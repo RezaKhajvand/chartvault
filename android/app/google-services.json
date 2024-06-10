@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "200559132206",
+    "project_id": "chartvault-9aa0b",
+    "storage_bucket": "chartvault-9aa0b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:200559132206:android:cdafb0a2705cd6e763a9bf",
+        "android_client_info": {
+          "package_name": "com.example.chartvault"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACjbW0jDW-0tLD5mZhcIXzQVrkA_cZU8U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
