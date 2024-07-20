@@ -1,11 +1,15 @@
 import 'package:chartvault/const/borderradius.dart';
 import 'package:chartvault/const/colors.dart';
+import 'package:chartvault/const/texttheme.dart';
+import 'package:chartvault/di.dart';
 import 'package:chartvault/firebase_options.dart';
+import 'package:chartvault/login/bloc/login_bloc.dart';
 import 'package:chartvault/login/login_screen.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,9 +18,15 @@ Future<void> main() async {
   await analytics.logEvent(name: 'Notcoin');
   await FirebaseMessaging.instance.requestPermission(provisional: true);
   await FirebaseMessaging.instance.subscribeToTopic("topic");
+  getItInit();
   // SystemChrome.setSystemUIOverlayStyle(
   //     const SystemUiOverlayStyle(statusBarColor: CustomColors.slate));
-  runApp(const MyApp());
+  runApp(
+    BlocProvider(
+      create: (context) => LoginBloc(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -64,9 +74,17 @@ class MyApp extends StatelessWidget {
             fontSize: 11.0,
           ),
           bodySmall: TextStyle(
-              color: Colors.white, fontWeight: FontWeight.w600, fontSize: 12.0),
+            color: Colors.white,
+            fontWeight: FontWeight.w600,
+            fontSize: 12.0,
+          ),
         ),
         inputDecorationTheme: InputDecorationTheme(
+            labelStyle: const TextStyle(
+              color: Colors.grey,
+              fontWeight: FontWeight.w300,
+              fontSize: 14.0,
+            ),
             prefixIconColor: Colors.white.withOpacity(0.5),
             focusedBorder: const UnderlineInputBorder(
                 borderSide:
