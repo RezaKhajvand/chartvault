@@ -1,11 +1,12 @@
 import 'package:chartvault/const/colors.dart';
 import 'package:chartvault/const/gradbackground.dart';
 import 'package:chartvault/const/texttheme.dart';
-import 'package:chartvault/news/utils/news_test.dart';
+import 'package:chartvault/news/models/news_model.dart';
+import 'package:chartvault/utils/dateformat.dart';
 import 'package:flutter/material.dart';
 
 class NewsDetailScreen extends StatefulWidget {
-  final NewsTest record;
+  final NewsRecord record;
   const NewsDetailScreen({super.key, required this.record});
 
   @override
@@ -29,8 +30,8 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
                   children: [
                     Hero(
                       tag: widget.record.id,
-                      child: Image.asset(
-                        widget.record.imagePath,
+                      child: Image.network(
+                        widget.record.image,
                         fit: BoxFit.cover,
                         height: double.infinity,
                         width: double.infinity,
@@ -72,7 +73,7 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
                     ),
                     const SizedBox(width: 8),
                     Text(
-                      '06/04/23 - 12:23',
+                      NewsUtils.formatDateTime(widget.record.createdAt),
                       style: context.labelSmall,
                     ),
                   ],
@@ -83,7 +84,7 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
               sliver: SliverToBoxAdapter(
                 child: Text(
-                  widget.record.desc,
+                  widget.record.content,
                   style: context.bodyMedium,
                   textAlign: TextAlign.start,
                 ),

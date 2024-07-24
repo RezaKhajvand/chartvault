@@ -1,10 +1,14 @@
 import 'package:chartvault/const/borderradius.dart';
 import 'package:chartvault/const/colors.dart';
-import 'package:chartvault/const/texttheme.dart';
+import 'package:chartvault/const/router.dart';
 import 'package:chartvault/di.dart';
 import 'package:chartvault/firebase_options.dart';
-import 'package:chartvault/login/bloc/login_bloc.dart';
-import 'package:chartvault/login/login_screen.dart';
+import 'package:chartvault/signin/bloc/login_bloc.dart';
+import 'package:chartvault/signin/signin_screen.dart';
+import 'package:chartvault/news/bloc/news_bloc.dart';
+import 'package:chartvault/signals/bloc/signals_bloc.dart';
+import 'package:chartvault/signup/bloc/signup_bloc.dart';
+import 'package:chartvault/workshop/bloc/workshop_bloc.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -18,12 +22,29 @@ Future<void> main() async {
   await analytics.logEvent(name: 'Notcoin');
   await FirebaseMessaging.instance.requestPermission(provisional: true);
   await FirebaseMessaging.instance.subscribeToTopic("topic");
-  getItInit();
+  await getItInit();
+
   // SystemChrome.setSystemUIOverlayStyle(
   //     const SystemUiOverlayStyle(statusBarColor: CustomColors.slate));
   runApp(
-    BlocProvider(
-      create: (context) => LoginBloc(),
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => LoginBloc(),
+        ),
+        BlocProvider(
+          create: (context) => NewsBloc(),
+        ),
+        BlocProvider(
+          create: (context) => WorkshopBloc(),
+        ),
+        BlocProvider(
+          create: (context) => SignalsBloc(),
+        ),
+        BlocProvider(
+          create: (context) => SignupBloc(),
+        ),
+      ],
       child: const MyApp(),
     ),
   );
@@ -34,8 +55,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
+      routerConfig: router,
       theme: ThemeData(
         textTheme: const TextTheme(
           headlineLarge: TextStyle(
@@ -131,7 +153,6 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: CustomColors.brightBlue),
         useMaterial3: true,
       ),
-      home: const LoginPage(),
     );
   }
 }

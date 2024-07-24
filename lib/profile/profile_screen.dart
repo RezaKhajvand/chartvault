@@ -1,10 +1,12 @@
 import 'package:chartvault/const/borderradius.dart';
 import 'package:chartvault/const/borders.dart';
 import 'package:chartvault/const/colors.dart';
-
+import 'package:chartvault/const/router.dart';
 import 'package:chartvault/const/texttheme.dart';
-import 'package:chartvault/login/login_screen.dart';
+import 'package:chartvault/signin/data/logout_datasource.dart';
+import 'package:chartvault/utils/authmanager.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class SettingItems {
   final IconData iconData;
@@ -144,13 +146,10 @@ class ProfileScreen extends StatelessWidget {
                           children: [
                             Expanded(
                                 child: ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pushAndRemoveUntil(
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const LoginPage(),
-                                          ),
-                                          (route) => false);
+                                    onPressed: () async {
+                                      getLogout();
+                                      AuthManager.clearAuthData();
+                                      context.pushReplacement(signinPage);
                                     },
                                     child: const Text('Yes'))),
                             const SizedBox(width: 20),
