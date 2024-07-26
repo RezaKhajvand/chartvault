@@ -3,8 +3,8 @@ import 'package:chartvault/const/colors.dart';
 import 'package:chartvault/const/router.dart';
 import 'package:chartvault/di.dart';
 import 'package:chartvault/firebase_options.dart';
+import 'package:chartvault/profile/bloc/profile_bloc.dart';
 import 'package:chartvault/signin/bloc/login_bloc.dart';
-import 'package:chartvault/signin/signin_screen.dart';
 import 'package:chartvault/news/bloc/news_bloc.dart';
 import 'package:chartvault/signals/bloc/signals_bloc.dart';
 import 'package:chartvault/signup/bloc/signup_bloc.dart';
@@ -44,6 +44,9 @@ Future<void> main() async {
         BlocProvider(
           create: (context) => SignupBloc(),
         ),
+        BlocProvider(
+          create: (context) => ProfileBloc(),
+        ), 
       ],
       child: const MyApp(),
     ),

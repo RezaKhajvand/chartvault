@@ -18,7 +18,9 @@ class SignalScreen extends StatefulWidget {
   State<SignalScreen> createState() => _SignalScreenState();
 }
 
-class _SignalScreenState extends State<SignalScreen> {
+class _SignalScreenState extends State<SignalScreen>with AutomaticKeepAliveClientMixin {
+    @override
+  bool get wantKeepAlive => true;
   final List<TagChip> chipList = [
     TagChip(name: 'All'),
     TagChip(name: 'Open', statusCode: 1),
@@ -38,6 +40,7 @@ class _SignalScreenState extends State<SignalScreen> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return CustomScrollView(
       slivers: [
         const HeadTitle(pageName: 'Signal Page'),

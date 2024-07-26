@@ -20,7 +20,10 @@ class VideosScreen extends StatefulWidget {
   State<VideosScreen> createState() => _VideosScreenState();
 }
 
-class _VideosScreenState extends State<VideosScreen> {
+class _VideosScreenState extends State<VideosScreen>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
   @override
   void initState() {
     super.initState();
@@ -29,6 +32,7 @@ class _VideosScreenState extends State<VideosScreen> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return BlocBuilder<WorkshopBloc, WorkshopState>(
       builder: (context, state) {
         if (state is WorkshopError) {

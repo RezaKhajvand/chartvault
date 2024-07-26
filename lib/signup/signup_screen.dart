@@ -53,7 +53,6 @@ class _SignUpPageState extends State<SignUpPage> {
         child: GestureDetector(
           onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
           child: Scaffold(
-            resizeToAvoidBottomInset: false,
             backgroundColor: Colors.transparent,
             bottomNavigationBar: TextButton(
               onPressed: () => context.go(signinPage),
@@ -62,18 +61,18 @@ class _SignUpPageState extends State<SignUpPage> {
             body: ClipRect(
               child: BackdropFilter(
                 filter: ImageFilter.blur(sigmaX: 40.0, sigmaY: 40.0),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: screenHeight * 0.21,
-                      child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Image.asset('images/loginimage.png',
-                            height: double.infinity, fit: BoxFit.fitHeight),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: screenHeight * 0.21,
+                        child: Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Image.asset('images/loginimage.png',
+                              height: double.infinity, fit: BoxFit.fitHeight),
+                        ),
                       ),
-                    ),
-                    Expanded(
-                      child: ClipRect(
+                      ClipRect(
                         child: BackdropFilter(
                           filter: ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0),
                           child: Container(
@@ -87,7 +86,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                     color: Colors.white.withOpacity(0.2)),
                               ),
                             ),
-                            child: SingleChildScrollView(
+                            child: Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 30, vertical: 20),
                               child: Column(
@@ -235,8 +234,8 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

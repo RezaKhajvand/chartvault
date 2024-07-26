@@ -52,6 +52,7 @@ class _SinginPageState extends State<SinginPage> {
           child: Scaffold(
             resizeToAvoidBottomInset: false,
             backgroundColor: Colors.transparent,
+            extendBody: true,
             bottomNavigationBar: TextButton(
               onPressed: () => context.go(signupPage),
               child: Text('Don t have an account? Signup',

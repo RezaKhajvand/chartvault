@@ -38,6 +38,7 @@ class CustomTextField extends TextFormField {
           obscureText: obscureText ?? false,
           maxLength: maxLength,
           decoration: InputDecoration(
+            contentPadding: EdgeInsets.zero,
             labelText: labelText,
             prefixIcon: Icon(prefixIcon, size: 20),
           ),
